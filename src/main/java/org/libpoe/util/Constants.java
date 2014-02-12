@@ -1,5 +1,16 @@
 package org.libpoe.util;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.libpoe.model.mod.ExplicitMod;
+import org.libpoe.model.mod.ImplicitMod;
+import org.libpoe.model.property.Property;
+import org.libpoe.model.socket.Sockets;
+import org.libpoe.serial.ExplicitModDeserializer;
+import org.libpoe.serial.ImplicitModDeserializer;
+import org.libpoe.serial.PropertyDeserializer;
+import org.libpoe.serial.SocketDeserializer;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,6 +20,8 @@ import java.util.regex.Pattern;
  * Time: 18:15
  */
 public class Constants {
+
+    public static final Gson GSON_INSTANCE;
 
     // Data below is courtesy of thexyz, thanks!
     public static final String[] ITEM_MODS = {
@@ -208,6 +221,13 @@ public class Constants {
             Matcher m2 = p2.matcher(ESCAPED_MODS[i]);
             ESCAPED_MODS[i] = m2.replaceAll("[^\\\\d]*([0-9]+[\\\\s]*[.,]{0,1}[\\\\s]*[0-9]*).*");
         }
+
+        GSON_INSTANCE = new GsonBuilder()
+                .enableComplexMapKeySerialization()
+                .registerTypeAdapter(Property.class, new PropertyDeserializer())
+                .registerTypeAdapter(Sockets.class, new SocketDeserializer())
+                .registerTypeAdapter(ExplicitMod.class, new ExplicitModDeserializer())
+                .registerTypeAdapter(ImplicitMod.class, new ImplicitModDeserializer()).create();
     }
 
 }

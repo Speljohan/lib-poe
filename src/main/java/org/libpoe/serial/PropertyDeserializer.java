@@ -35,7 +35,7 @@ public class PropertyDeserializer implements JsonDeserializer<Property> {
                 int value = Integer.valueOf(base.get(0).getAsString().replaceAll("[^\\d]", ""));
                 return new PercentageProperty(name, displayMode, augmented, value);
             } else if (val.contains(".")) { // Fraction
-                double value = base.get(0).getAsDouble();
+                double value = base.get(0).getAsDouble(); // TODO: Does not work on gems. Rewrite of this entire awful class recommended.
                 return new DecProperty(name, displayMode, augmented, value);
             } else { // Flat
                 int value = base.get(0).getAsInt();
