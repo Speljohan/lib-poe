@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
  * User: Johan
  * Date: 2013-12-02
  * Time: 09:17
+ * TODO: Refactor this class
  */
 public class PropertyDeserializer implements JsonDeserializer<Property> {
 
