@@ -10,6 +10,7 @@ import org.libpoe.model.property.DecProperty;
 import org.libpoe.model.property.IntProperty;
 import org.libpoe.model.property.MinMaxProperty;
 import org.libpoe.model.property.PercentageProperty;
+import org.libpoe.util.AugmentColour;
 import org.libpoe.util.Constants;
 
 import java.lang.reflect.Type;
@@ -31,14 +32,14 @@ public class ImplicitModDeserializer implements JsonDeserializer<ImplicitMod> {
             while (m.find()) {
                 if (m.groupCount() == 1) {
                     if (jsonElement.getAsString().contains("%")) {
-                        return new ImplicitMod(new PercentageProperty(jsonElement.getAsString(), 1, true, Integer.parseInt(m.group(1))));
+                        return new ImplicitMod(new PercentageProperty(jsonElement.getAsString(), 1, AugmentColour.DEFAULT_AUGMENT, Integer.parseInt(m.group(1))));
                     } else if (jsonElement.getAsString().contains(".")) {
-                        return new ImplicitMod(new DecProperty(jsonElement.getAsString(), 1, true, Double.parseDouble(m.group(1))));
+                        return new ImplicitMod(new DecProperty(jsonElement.getAsString(), 1, AugmentColour.DEFAULT_AUGMENT, Double.parseDouble(m.group(1))));
                     } else {
-                        return new ImplicitMod(new IntProperty(jsonElement.getAsString(), 1, true, Integer.parseInt(m.group(1))));
+                        return new ImplicitMod(new IntProperty(jsonElement.getAsString(), 1, AugmentColour.DEFAULT_AUGMENT, Integer.parseInt(m.group(1))));
                     }
                 } else if (m.groupCount() == 2) {
-                    return new ImplicitMod(new MinMaxProperty(jsonElement.getAsString(), 1, true, Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2))));
+                    return new ImplicitMod(new MinMaxProperty(jsonElement.getAsString(), 1, AugmentColour.DEFAULT_AUGMENT, Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2))));
                 }
             }
         }

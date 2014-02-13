@@ -1,5 +1,7 @@
 package org.libpoe.model.property;
 
+import org.libpoe.util.AugmentColour;
+
 /**
  * User: Johan
  * Date: 2013-12-02
@@ -9,12 +11,12 @@ public class Property {
 
     private String name;
     private int displayMode;
-    private boolean augmented;
+    private AugmentColour colour;
 
-    public Property(String name, int displayMode, boolean augmented) {
+    public Property(String name, int displayMode, AugmentColour colour) {
         this.name = name;
         this.displayMode = displayMode;
-        this.augmented = augmented;
+        this.colour = colour;
     }
 
     public String getName() {
@@ -25,8 +27,8 @@ public class Property {
         return displayMode;
     }
 
-    public boolean isAugmented() {
-        return augmented;
+    public AugmentColour getAugmentColour() {
+        return colour;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class Property {
         return "Property{" +
                 "name='" + name + '\'' +
                 ", displayMode=" + displayMode +
-                ", augmented=" + augmented +
+                ", augmentColour=" + colour +
                 '}';
     }
 }

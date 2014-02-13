@@ -1,5 +1,7 @@
 package org.libpoe.model.property;
 
+import org.libpoe.util.AugmentColour;
+
 /**
  * User: Johan
  * Date: 2013-12-02
@@ -9,8 +11,8 @@ public class IntProperty extends Property {
 
     private int value;
 
-    public IntProperty(String name, int displayMode, boolean augmented, int value) {
-        super(name, displayMode, augmented);
+    public IntProperty(String name, int displayMode, AugmentColour colour, int value) {
+        super(name, displayMode, colour);
         this.value = value;
     }
 
