@@ -25,6 +25,7 @@ public class StashLoader {
 
     /**
      * Reads a stash tab from file
+     *
      * @param fileName The file containing stash info
      * @return Requested stash tab
      * @throws Exception
@@ -38,21 +39,22 @@ public class StashLoader {
                 .registerSubtype(Map.class);
 
         Gson gson = new GsonBuilder()
-            .enableComplexMapKeySerialization()
-            .registerTypeAdapterFactory(itemAdapter)
-            .registerTypeAdapter(Property.class, new PropertyDeserializer())
-            .registerTypeAdapter(Sockets.class, new SocketDeserializer())
-            .registerTypeAdapter(ExplicitMod.class, new ExplicitModDeserializer())
-            .registerTypeAdapter(ImplicitMod.class, new ImplicitModDeserializer()).create();
+                .enableComplexMapKeySerialization()
+                .registerTypeAdapterFactory(itemAdapter)
+                .registerTypeAdapter(Property.class, new PropertyDeserializer())
+                .registerTypeAdapter(Sockets.class, new SocketDeserializer())
+                .registerTypeAdapter(ExplicitMod.class, new ExplicitModDeserializer())
+                .registerTypeAdapter(ImplicitMod.class, new ImplicitModDeserializer()).create();
 
         return gson.fromJson(new JsonReader(new FileReader(fileName)), StashTab.class);
     }
 
     /**
      * Retrieves a stash tab from desired account
-     * @param info Authentication info
+     *
+     * @param info   Authentication info
      * @param league Target league
-     * @param tabId Index of the stash tab to retrieve
+     * @param tabId  Index of the stash tab to retrieve
      * @return Requested tab stash
      */
     public static StashTab fromAccount(AuthInfo info, League league, int tabId) {
