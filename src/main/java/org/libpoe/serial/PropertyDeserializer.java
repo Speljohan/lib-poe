@@ -33,18 +33,24 @@ public class PropertyDeserializer implements JsonDeserializer<Property> {
                 int minValue = Integer.valueOf(val.split("-")[0]);
                 int maxValue = Integer.valueOf(val.split("-")[1]);
                 return new MinMaxProperty(name, displayMode, AugmentColour.forId(augmentColour), minValue, maxValue);
+            } else if (val.contains("/")) { // Stack Size
+                int minValue = Integer.valueOf(val.split("/")[0]);
+                int maxValue = Integer.valueOf(val.split("/")[1]);
+                return new MinMaxProperty(name, displayMode, AugmentColour.forId(augmentColour), minValue, maxValue);
             } else if (val.contains("%")) { // Percentage
                 int value = Integer.valueOf(base.get(0).getAsString().replaceAll("[^\\d]", ""));
                 return new PercentageProperty(name, displayMode, AugmentColour.forId(augmentColour), value);
             } else if (val.contains(".")) { // Fraction
-                double value = base.get(0).getAsDouble(); // TODO: Does not work on gems. Rewrite of this entire awful class recommended.
+                double value = Double.parseDouble(base.get(0).getAsString().replaceAll("[^\\d.]", ""));
                 return new DecProperty(name, displayMode, AugmentColour.forId(augmentColour), value);
             } else { // Flat
-                int value = base.get(0).getAsInt();
+                int value = Integer.parseInt(base.get(0).getAsString().replaceAll("[^\\d]", ""));
                 return new IntProperty(name, displayMode, AugmentColour.forId(augmentColour), value);
             }
         } else {
             return new Property(name, displayMode, AugmentColour.WHITE);
         }
     }
+
+
 }
