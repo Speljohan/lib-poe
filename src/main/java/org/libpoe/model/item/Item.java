@@ -1,9 +1,9 @@
 package org.libpoe.model.item;
 
-import org.libpoe.model.socket.Sockets;
 import org.libpoe.model.mod.ExplicitMod;
 import org.libpoe.model.mod.ImplicitMod;
 import org.libpoe.model.property.Property;
+import org.libpoe.model.socket.Sockets;
 
 import java.util.Arrays;
 
@@ -86,6 +86,20 @@ public class Item {
     }
 
     public ImplicitMod[] getImplicitMods() { return implicitMods; }
+
+    public Property getProperty(String name) {
+        for (Property p : properties) {
+            if (p.getName().equals(name)) return p;
+        }
+        return null;
+    }
+
+    public Property getRequirement(String name) {
+        for (Property p : requirements) {
+            if (p.getName().equals(name)) return p;
+        }
+        return null;
+    }
 
     @Override
     public String toString() {

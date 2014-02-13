@@ -42,6 +42,7 @@ public class StashLoader {
                 .enableComplexMapKeySerialization()
                 .registerTypeAdapterFactory(itemAdapter)
                 .registerTypeAdapter(Property.class, new PropertyDeserializer())
+                .registerTypeAdapter(Property.class, new RequirementDeserializer())
                 .registerTypeAdapter(Sockets.class, new SocketDeserializer())
                 .registerTypeAdapter(ExplicitMod.class, new ExplicitModDeserializer())
                 .registerTypeAdapter(ImplicitMod.class, new ImplicitModDeserializer()).create();
