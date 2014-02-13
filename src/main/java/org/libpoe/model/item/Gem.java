@@ -6,4 +6,8 @@ package org.libpoe.model.item;
  * Time: 10:44
  */
 public class Gem extends Item {
+
+    public String toString() {
+        return "Gem{" + super.toString() + "}";
+    }
 }

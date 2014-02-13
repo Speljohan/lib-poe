@@ -6,4 +6,9 @@ package org.libpoe.model.item;
  * Time: 10:43
  */
 public class Map extends Item {
+
+    public String toString() {
+        return "Map{" + super.toString() + "}";
+    }
+
 }

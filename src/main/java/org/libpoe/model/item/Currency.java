@@ -6,4 +6,9 @@ package org.libpoe.model.item;
  * Time: 10:43
  */
 public class Currency extends Item {
+
+    public String toString() {
+        return "Currency{" + super.toString() + "}";
+    }
+
 }

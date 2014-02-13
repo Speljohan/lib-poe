@@ -3,17 +3,16 @@ package org.libpoe.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import org.libpoe.model.StashTab;
+import org.libpoe.model.item.*;
 import org.libpoe.model.mod.ExplicitMod;
 import org.libpoe.model.mod.ImplicitMod;
 import org.libpoe.model.property.Property;
 import org.libpoe.model.socket.Sockets;
 import org.libpoe.net.AuthInfo;
 import org.libpoe.net.DataReader;
-import org.libpoe.serial.ExplicitModDeserializer;
-import org.libpoe.serial.ImplicitModDeserializer;
-import org.libpoe.serial.PropertyDeserializer;
-import org.libpoe.serial.SocketDeserializer;
+import org.libpoe.serial.*;
 
 import java.io.FileReader;
 
@@ -31,8 +30,16 @@ public class StashLoader {
      * @throws Exception
      */
     public static StashTab fromFile(String fileName) throws Exception {
+
+        RuntimeTypeAdapterFactory<Item> itemAdapter = RuntimeTypeAdapterFactory.of(Item.class, new ItemTypePredicate())
+                .registerSubtype(Currency.class)
+                .registerSubtype(Equipment.class)
+                .registerSubtype(Gem.class)
+                .registerSubtype(Map.class);
+
         Gson gson = new GsonBuilder()
             .enableComplexMapKeySerialization()
+            .registerTypeAdapterFactory(itemAdapter)
             .registerTypeAdapter(Property.class, new PropertyDeserializer())
             .registerTypeAdapter(Sockets.class, new SocketDeserializer())
             .registerTypeAdapter(ExplicitMod.class, new ExplicitModDeserializer())
